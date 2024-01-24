@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .trail {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #3498db; /* Change to your desired trail color */
+      border-radius: 50%;
+      pointer-events: none;
+      transform-origin: center;
+      opacity: 0;
+      transition: transform 0.1s ease-out, opacity 0.5s ease-out;
+      z-index: 9999; /* Ensure it's above other elements */
+    }
+
+    /* Optional: Style your links or interactive elements */
+    a {
+      color: #3498db; /* Change to your desired link color */
+      text-decoration: none;
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #e74c3c; /* Change to your desired hover color */
+    }
+
+    p {
+      /* Ensure the cursor remains visible over the paragraph */
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Your website content -->
+  <h1>Welcome to My Website</h1>
+  <p>Hover over links or this paragraph to see the mouse trail effect!</p>
+  
+  <a href="#">Link 1</a>
+  <a href="#">Link 2</a>
+
+  <script>
+    document.addEventListener('mousemove', function (e) {
+      const trail = document.createElement('div');
+      trail.className = 'trail';
+      document.body.appendChild(trail);
+
+      trail.style.left = e.clientX + 'px';
+      trail.style.top = e.clientY + 'px';
+
+      // Trigger layout for Edge
+      void trail.offsetWidth;
+
+      // Delay the opacity transition to create a fading effect
+      setTimeout(() => {
+        trail.style.transform = 'scale(2)';
+        trail.style.opacity = '0';
+      }, 10);
+
+      // Remove the trail element after the transition
+      setTimeout(() => {
+        trail.remove();
+      }, 500);
+    });
+  </script>
+</body>
+</html>
